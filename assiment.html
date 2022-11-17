@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./assiment.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    
+    <div class="header">
+      <div><img src="./logo.jpg" alt="" /></div>
+      <div class="icon">
+        <i class="fa-solid fa-house-chimney"></i>
+        <i class="fa-sharp fa-solid fa-binoculars"></i>
+        <i class="fa-solid fa-screwdriver-wrench"></i>
+        <i class="fa-solid fa-bell"></i>
+        <i class="fa-sharp fa-solid fa-circle"></i>
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </div>
+    </div>
+
+    <!-- <div class="mainContainer">
+    <div class="mainContainerHeader">
+      <p>You are taking challange of new project</p>
+    </div>
+    <div class="contain">
+      <div class="container">
+        <div class="title">Asset Heading 1</div>
+        <div>
+          <p class="Para">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of
+            type and scrambled it to make a type specimen book. It has
+            survived not only five centuries, but also the leap into
+            electronic typesetting, remaining essentially unchanged. It was
+            popularised in the 1960s with the release of Letraset sheets
+            containing Lorem Ipsum passages, and more recently with desktop
+            publishing software like Aldus PageMaker including versions of
+            Lorem Ipsum.
+          </p>
+          <div>
+            <i class="fa-solid fa-caret-down"></i>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="title">Asset Heading 2</div>
+        <div><i class="fa-solid fa-caret-down"></i></div>
+        <div class="text">
+          <div>
+            <textarea name="" id="textarea" cols="50" rows="10"></textarea>
+          </div>
+          <div class="btn"><button id="btn">submit</button></div>
+        </div>
+        <div><i class="fa-solid fa-caret-down"></i></div>
+      </div>
+      <div class="container">
+        <div class="title">Asset Heading 3</div>
+        <div>
+          <iframe width="490" height="240" src="https://en.wikipedia.org/wiki/Big_data" frameborder="0"></iframe>
+          <div><i class="fa-solid fa-caret-down"></i></div>
+        </div>
+
+      </div>
+
+      <div class="container">
+        <div class="title">Asset Heading 4</div>
+        <div><img class="img" src="./hqdefault.jpg" alt="" /></div>
+        <div><i class="fa-solid fa-caret-down"></i></div>
+      </div>
+      <div class="container">
+        <div class="title">Asset Heading 5</div>
+        <div class="audio">
+          <audio class="player" src="./Baller.mp3" controls></audio>
+        </div>
+        <div>
+          <p class="Para">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry's standard dummy text
+            ever since the 1500s, when an unknown printer took a galley of
+            type and scrambled it to make a type specimen book. It has
+            survived not only five centuries, but also the leap into
+            electronic typesetting.
+          </p>
+        </div>
+      </div>
+      <div class="container">
+        <div class="title">Asset Heading 6</div>
+        <div class="video">
+          <iframe width="490" height="240" src="https://www.youtube.com/embed/LfMQb6RLVFA" title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+    <div>
+      <div onclick="displayHeading()"><i class="fa-sharp fa-solid fa-bars"></i></div>
+    <div class="options hide">  
+<div class="boards">
+  <p>Journey Bords</p>
+</div>
+      <div>
+        <p class="slide">Name of the task goes here</p>
+     
+     <ul>
+      <li>Asset heading 1</li>
+      <li>Asset heading 2</li>
+      <li>Asset heading 3</li>
+      <li>Asset heading 4</li>
+      <li>Asset heading 5</li>
+      <li>Asset heading 6</li>
+     </ul>
+    </div>
+    </div>
+      <div class="mainContainer">
+        <div class="mainContainerHeader">
+          <p>You are taking challange of new project</p>
+        </div>
+        <div class="contain" id="asset"></div>
+      </div>
+    </div>
+
+    <script>
+      // const dataArr = [];
+
+      // fetch('data.json')
+      //   .then((response) => response.json())
+      //   .then((data) =>console.log(data.tasks[0].assets))
+  let heading = document.querySelector('.options')
+   const displayHeading = () =>{
+    heading.classList.toggle('hide')
+   }
+
+      async function getData(dataUrl) {
+        const response = await fetch(dataUrl);
+        var data = await response.json();
+        console.log(data.tasks[0].assets);
+        let dataArr = data.tasks[0].assets;
+        console.log(dataArr[0].display_asset_reflection);
+        displayData(dataArr);
+      }
+      getData("data.json");
+
+      let content = "";
+      function displayData(value) {
+        for (let i of value) {
+          content += `<div id=${i.asset_title.replace(/ +/g, "")} class="container">
+
+        <div class="title">${i.asset_title}</div>
+
+        <div class="contents">
+          ${
+            i.display_asset_docs ||
+            i.display_asset_image ||
+            i.display_asset_url ||
+            i.display_asset_video
+              ? ``
+              : `<p class="Para">${i.asset_description}</p>`
+          }
+
+          ${
+            i.display_asset_docs
+              ? `<iframe width="490" height="240" src=${i.display_asset_docs} frameborder="0"></iframe>`
+              : ``
+          }
+
+          ${
+            i.display_asset_image
+              ? `<img src=${i.display_asset_image} class="gifImg" alt='imageHere'/>`
+              : ``
+          }
+
+          ${
+            i.display_asset_url
+              ? `<audio controls="controls">
+                  <source src="https://docs.google.com/uc?export=download&id=1dBBYQsz2yt3vc4YMkRmVC3nuTBbq2GON">
+                </audio>`
+              : ``
+          }
+
+          ${
+            i.display_asset_video
+              ? `<iframe width="490" height="240" src=${i.display_asset_video} title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen></iframe>`
+              : ``
+          }
+
+          <i class="fa-solid fa-caret-down"></i>
+        
+        </div>
+
+      </div>`;
+        }
+        document.getElementById("asset").innerHTML = content;
+      }
+    </script>
+  </body>
+</html>
